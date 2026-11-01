@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WMC Lab - All Codes (Quick Copy)</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --tx: #e6edf3;
+            --muted: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --orange: #d29922;
+            --code-bg: #0d1117;
+            --btn-bg: #21262d;
+            --btn-hover: #30363d;
+            --success: #238636;
+        }
+
+        body.light-theme {
+            color-scheme: light;
+            --bg: #ffffff;
+            --card: #f6f8fa;
+            --border: #d0d7de;
+            --tx: #1f2328;
+            --muted: #656d76;
+            --accent: #0969da;
+            --green: #1a7f37;
+            --orange: #9a6700;
+            --code-bg: #f6f8fa;
+            --btn-bg: #f3f4f6;
+            --btn-hover: #e5e7eb;
+            --success: #1a7f37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--tx);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        /* ---- Top Navigation Bar ---- */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-bar h1 {
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-bar h1 span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a,
+        .nav-links button {
+            background: var(--btn-bg);
+            border: 1px solid var(--border);
+            color: var(--tx);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.15s, border-color 0.15s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links button:hover {
+            background: var(--btn-hover);
+            border-color: var(--accent);
+        }
+
+        .nav-links a.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .back-link {
+            background: transparent !important;
+            border-color: var(--accent) !important;
+            color: var(--accent) !important;
+        }
+
+        /* ---- Main Container ---- */
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+        }
+
+        /* ---- Page Banner ---- */
+        .page-banner {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin-bottom: 28px;
+        }
+
+        .page-banner h2 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .page-banner p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid;
+        }
+
+        .badge.blue {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(88, 166, 255, 0.08);
+        }
+
+        .badge.green {
+            color: var(--green);
+            border-color: var(--green);
+            background: rgba(63, 185, 80, 0.08);
+        }
+
+        .badge.orange {
+            color: var(--orange);
+            border-color: var(--orange);
+            background: rgba(210, 153, 34, 0.08);
+        }
+
+        /* ---- Quick Jump ---- */
+        .quick-jump {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .quick-jump a {
+            padding: 6px 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--accent);
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .quick-jump a:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* ---- Code Card ---- */
+        .code-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .code-card:hover {
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .card-header .title-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .card-header .exp-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--accent);
+        }
+
+        .card-header .exp-name {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--tx);
+        }
+
+        .card-header .file-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 12px;
+            color: var(--muted);
+            background: var(--bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
+        .btn-copy-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--success);
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+
+        .btn-copy-all:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy-all.copied {
+            background: var(--green) !important;
+        }
+
+        .btn-copy-all svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .code-body {
+            position: relative;
+        }
+
+        .code-body pre {
+            margin: 0;
+            padding: 16px 20px;
+            overflow-x: auto;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--tx);
+            background: var(--bg);
+            border: none;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .code-body pre code {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        /* ---- Line numbers ---- */
+        .line-numbers {
+            counter-reset: line;
+        }
+
+        .line-numbers .line::before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            width: 30px;
+            margin-right: 16px;
+            text-align: right;
+            color: var(--muted);
+            opacity: 0.5;
+            font-size: 12px;
+            user-select: none;
+        }
+
+        /* ---- Info Boxes for non-code experiments ---- */
+        .info-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--orange);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+        }
+
+        .info-card .exp-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--orange);
+            margin-bottom: 4px;
+        }
+
+        .info-card .exp-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ---- Footer ---- */
+        .page-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        /* ---- Scroll to top ---- */
+        #scrollTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 99;
+            transition: transform 0.2s;
+        }
+
+        #scrollTop:hover {
+            transform: scale(1.1);
+        }
+
+        #scrollTop.show {
+            display: flex;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 640px) {
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .code-body pre {
+                font-size: 11.5px;
+                padding: 12px 10px;
+            }
+
+            .top-bar h1 {
+                font-size: 14px;
+            }
+        }
+
+        @media print {
+
+            .top-bar,
+            #scrollTop,
+            .btn-copy-all,
+            .quick-jump,
+            .nav-links button {
+                display: none !important;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .code-card,
+            .info-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <h1>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span>WMC Lab</span> — All Codes
+        </h1>
+        <div class="nav-links">
+            <a href="index.html" class="back-link">← Back to Full Manual</a>
+            <button onclick="copyAllCodes()" id="copyAllBtn">📋 Copy All Codes</button>
+            <button onclick="toggleTheme()" id="themeToggle">🌙 Theme</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Page Banner -->
+        <div class="page-banner">
+            <h2>Quick Code Reference — Copy & Paste Ready</h2>
+            <p>All MATLAB source codes from the WMC Lab Practical Manual in one page. Click the green "Copy Code" button
+                on any experiment to instantly copy the full code to your clipboard.</p>
+            <div class="badge-row">
+                <span class="badge blue">3 MATLAB Codes</span>
+                <span class="badge green">One-Click Copy</span>
+                <span class="badge orange">6 Experiments — No Code</span>
+            </div>
+        </div>
+
+        <!-- Quick Jump Links -->
+        <div class="quick-jump">
+            <a href="#code-exp2">Exp 2 — AM System</a>
+            <a href="#code-exp3">Exp 3 — Freq Reuse</a>
+            <a href="#code-exp5">Exp 5 — RSSI vs Dist</a>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 1 — No Code -->
+        <!-- ================================================================ -->
+        <div class="info-card">
+            <div class="exp-label">Experiment 01</div>
+            <div class="exp-name">Study of Electromagnetic Spectrum Allocation and Wireless Bands</div>
+            <p>📝 Pure theoretical study — no programming code required.</p>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 2 — MATLAB Code -->
+        <!-- ================================================================ -->
+        <div class="code-card" id="code-exp2">
+            <div class="card-header">
+                <div class="title-area">
+                    <div class="exp-label">Experiment 02</div>
+                    <div class="exp-name">Simulation of Basic Communication System (Tx - Channel - Rx)</div>
+                    <div class="file-name">📄 Exp2_A27_WMC.m &nbsp;—&nbsp; MATLAB</div>
+                </div>
+                <button class="btn-copy-all" onclick="copyCode(this, 'code2')">
+                    <svg viewBox="0 0 16 16">
+                        <path
+                            d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25zM5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25z" />
+                    </svg>
+                    Copy Code
+                </button>
+            </div>
+            <div class="code-body">
+                <pre id="code2"><code>% MATLAB Code: Basic AM Communication System (Tx - Channel - Rx)
+% Student: Prajwal Ashok Zolage | Roll No: A27 | Branch: AI&amp;DS (T.E / A1)
+% Aim: Simulation of Basic Communication System using MATLAB
+
+clc;
+clear;
+close all;
+
+%% Step 1: Generate Message Signal (Transmitter)
+Fs = 1000;              % Sampling frequency (Hz)
+t = 0:1/Fs:1;          % Time vector (1 second duration)
+
+fm = 5;                % Message frequency = 5 Hz
+message = sin(2*pi*fm*t);
+
+%% Step 2: Generate Carrier Signal
+fc = 50;               % Carrier frequency = 50 Hz
+carrier = sin(2*pi*fc*t);
+
+%% Step 3: AM Modulation
+% Standard AM: (1 + m(t)) .* carrier
+modulated = (1 + message) .* carrier;
+
+%% Step 4: Communication Channel (Add Noise)
+% Add Gaussian random noise to simulate real-world transmission channel
+noise = 0.2 * randn(size(modulated));
+received = modulated + noise;
+
+%% Step 5: Receiver (Simple Detection / Envelope Detection)
+demodulated = abs(received);
+
+%% Step 6: Plot Signals
+figure('Name', 'Basic Communication System Simulation');
+
+subplot(5,1,1);
+plot(t, message, 'b', 'LineWidth', 1.2);
+title('Message Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;
+
+subplot(5,1,2);
+plot(t, carrier, 'r', 'LineWidth', 1.2);
+title('Carrier Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;
+
+subplot(5,1,3);
+plot(t, modulated, 'm', 'LineWidth', 1.2);
+title('AM Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;
+
+subplot(5,1,4);
+plot(t, received, 'k', 'LineWidth', 1.1);
+title('Received Signal (After Channel Noise)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;
+
+subplot(5,1,5);
+plot(t, demodulated, 'g', 'LineWidth', 1.2);
+title('Recovered Signal (Demodulated)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+grid on;</code></pre>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 3 — MATLAB Code -->
+        <!-- ================================================================ -->
+        <div class="code-card" id="code-exp3">
+            <div class="card-header">
+                <div class="title-area">
+                    <div class="exp-label">Experiment 03</div>
+                    <div class="exp-name">Demonstration of Frequency Reuse Concept in Cellular Systems</div>
+                    <div class="file-name">📄 Exp3_A27_WMC.m &nbsp;—&nbsp; MATLAB</div>
+                </div>
+                <button class="btn-copy-all" onclick="copyCode(this, 'code3')">
+                    <svg viewBox="0 0 16 16">
+                        <path
+                            d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25zM5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25z" />
+                    </svg>
+                    Copy Code
+                </button>
+            </div>
+            <div class="code-body">
+                <pre id="code3"><code>%% Demonstration of Frequency Reuse Concept in Cellular Systems
+% Student: Prajwal Ashok Zolage | Roll No: A27 | Branch: TE/AI&amp;DS (A1)
+% Dop: 24/07/2026 | Aim: Simulation of Frequency Reuse in MATLAB
+
+clc;
+clear;
+close all;
+
+%% 1. Cluster parameters
+N = 7;                 % Cluster size (must satisfy N = i^2 + i*j + j^2)
+i = 2;
+j = 1;                 % Shift parameters for N = 7
+
+%% 2. Generate hexagonal grid (axial coordinates q, r)
+range = 4;
+size_hex = 1;          % Hexagon "radius" (center to vertex)
+colors = lines(N);     % N distinct colors, one per frequency group
+
+figure('Color', 'w', 'Name', 'Frequency Reuse Pattern (N = 7)');
+hold on;
+axis equal;
+axis off;
+
+for q = -range : range
+    for r = -range : range
+        % Keep a hexagonal region
+        if abs(q) &lt;= 4 &amp;&amp; abs(r) &lt;= 4 &amp;&amp; abs(q + r) &lt;= 4
+            
+            % Frequency group assignment
+            group = mod(q*j - r*i, N);  % 0 to N-1
+            
+            % Axial -> Cartesian (pointy-top hexagon layout)
+            x = size_hex * sqrt(3) * (q + r/2);
+            y = size_hex * 1.5 * r;
+            
+            % Draw hexagon
+            drawhexagon(x, y, size_hex, colors(group + 1, :));
+            
+            % Display frequency group number
+            text(x, y, num2str(group + 1), ...
+                'HorizontalAlignment', 'center', ...
+                'FontWeight', 'bold', ...
+                'FontSize', 9);
+        end
+    end
+end
+
+title(['Frequency Reuse Pattern (Cluster Size N = ', num2str(N), ')']);
+
+%% 3. Hexagon drawing function
+function drawhexagon(x, y, s, faceColor)
+    % Pointy-top orientation
+    angles = (0:60:360) + 30;
+    xx = x + s * cosd(angles);
+    yy = y + s * sind(angles);
+    patch(xx, yy, faceColor, ...
+        'EdgeColor', 'k', ...
+        'LineWidth', 1);
+end</code></pre>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 4 — No Code -->
+        <!-- ================================================================ -->
+        <div class="info-card">
+            <div class="exp-label">Experiment 04</div>
+            <div class="exp-name">Wi-Fi Network Scanning Using Mobile Apps (SSID, RSSI, Channel Mapping)</div>
+            <p>📱 Mobile app experiment — no programming code. Uses Wi-Fi Analyzer app for scanning.</p>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 5 — MATLAB Code -->
+        <!-- ================================================================ -->
+        <div class="code-card" id="code-exp5">
+            <div class="card-header">
+                <div class="title-area">
+                    <div class="exp-label">Experiment 05</div>
+                    <div class="exp-name">Measurement of Signal Strength vs. Distance for a Wi-Fi Router</div>
+                    <div class="file-name">📄 Exp5_A27_WMC.m &nbsp;—&nbsp; MATLAB</div>
+                </div>
+                <button class="btn-copy-all" onclick="copyCode(this, 'code5')">
+                    <svg viewBox="0 0 16 16">
+                        <path
+                            d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25zM5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25z" />
+                    </svg>
+                    Copy Code
+                </button>
+            </div>
+            <div class="code-body">
+                <pre id="code5"><code>%% Wi-Fi Signal Strength vs Distance Measurement
+% Student: Prajwal Ashok Zolage | Roll No: A27 | Branch: TE/AI&amp;DS (A1)
+% Dop: 21/08/2026 | Aim: Measurement of Signal Strength vs Distance
+
+clc;
+clear;
+close all;
+
+% Distance from Wi-Fi source in metres
+distance = [0 8 12 17 48];
+
+% Measured RSSI values in dBm
+RSSI = [-28 -58 -62 -65 -74];
+
+% Plot graph
+figure('Name', 'Wi-Fi RSSI vs Distance');
+plot(distance, RSSI, '-o', 'LineWidth', 2, 'MarkerSize', 7);
+grid on;
+
+% Labels and title
+xlabel('Distance from Wi-Fi Source (m)');
+ylabel('Signal Strength (RSSI) (dBm)');
+title('Wi-Fi Signal Strength vs Distance');
+
+% Display RSSI values on graph
+for i = 1:length(distance)
+    text(distance(i), RSSI(i), sprintf('  %.0f dBm', RSSI(i)), ...
+        'FontSize', 9, 'FontWeight', 'bold');
+end</code></pre>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 6 — No Code -->
+        <!-- ================================================================ -->
+        <div class="info-card">
+            <div class="exp-label">Experiment 06</div>
+            <div class="exp-name">Throughput and Latency Measurement Using Network Tools</div>
+            <p>🖥️ Command-line experiment — uses <code
+                    style="background:var(--bg); padding:1px 6px; border-radius:3px;">ping google.com</code> and
+                Speedtest.net. No programming code.</p>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 7 — No Code -->
+        <!-- ================================================================ -->
+        <div class="info-card">
+            <div class="exp-label">Experiment 07</div>
+            <div class="exp-name">Study of Bluetooth Communication Using Mobile Devices</div>
+            <p>📶 Hands-on hardware experiment — Bluetooth pairing & range testing. No programming code.</p>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 8 — No Code -->
+        <!-- ================================================================ -->
+        <div class="info-card">
+            <div class="exp-label">Experiment 08</div>
+            <div class="exp-name">Study of Path Loss in an Indoor Environment (RSSI vs. Obstacles)</div>
+            <p>📡 Physical measurement experiment — RSSI readings at different distances/obstacles. No programming code.
+            </p>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- EXPERIMENT 9 — No Code -->
+        <!-- ================================================================ -->
+        <div class="info-card">
+            <div class="exp-label">Experiment 09</div>
+            <div class="exp-name">Introduction to Network Simulation Tool (Cisco Packet Tracer)</div>
+            <p>🔌 GUI-based simulation — Cisco Packet Tracer topology setup. No programming code.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+            WMC Lab — Wireless and Mobile Communication Practical Manual<br>
+            Student: Prajwal Ashok Zolage | Roll No: A27 | Branch: AI &amp; DS | Class: T.E. (A1 Batch)
+        </div>
+    </main>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+    <script>
+        // Copy individual code block
+        function copyCode(btn, codeId) {
+            const codeEl = document.getElementById(codeId);
+            const text = codeEl.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Copy ALL codes at once
+        function copyAllCodes() {
+            const codeIds = ['code2', 'code3', 'code5'];
+            const labels = [
+                '% ========================================',
+                '% EXPERIMENT 2 — AM Communication System',
+                '% ========================================',
+                '',
+                '',
+                '% ========================================',
+                '% EXPERIMENT 3 — Frequency Reuse Pattern',
+                '% ========================================',
+                '',
+                '',
+                '% ========================================',
+                '% EXPERIMENT 5 — RSSI vs Distance',
+                '% ========================================'
+            ];
+
+            let allCode = '';
+            codeIds.forEach((id, idx) => {
+                const el = document.getElementById(id);
+                if (idx > 0) allCode += '\n\n\n';
+                allCode += labels[idx * 5] + '\n' + labels[idx * 5 + 1] + '\n' + labels[idx * 5 + 2] + '\n\n';
+                allCode += el.innerText;
+            });
+
+            navigator.clipboard.writeText(allCode).then(() => {
+                const btn = document.getElementById('copyAllBtn');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '✅ All Codes Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                }, 2500);
+            });
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('wmc_codes_theme', isLight ? 'light' : 'dark');
+            document.getElementById('themeToggle').innerHTML = isLight ? '☀️ Theme' : '🌙 Theme';
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('wmc_codes_theme') === 'light') {
+            document.body.classList.add('light-theme');
+            document.getElementById('themeToggle').innerHTML = '☀️ Theme';
+        }
+
+        // Scroll to top button
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTop');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+
+</html>
