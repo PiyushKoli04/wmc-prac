@@ -887,6 +887,322 @@
             border: none;
             display: block;
         }
+    
+        /* ======================================================== */
+        /* COMPREHENSIVE MOBILE-FRIENDLY & RESPONSIVE ENHANCEMENTS */
+        /* ======================================================== */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            box-sizing: border-box;
+        }
+
+        .title-bar {
+            width: 100%;
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+
+        .title-left {
+            min-width: 0;
+            flex: 0 1 auto;
+        }
+
+        .win-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .title-right {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .title-bar .btn-tool {
+            padding: 4px 10px;
+            font-size: 11.5px;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .title-bar .btn-codes {
+            background: #007acc !important;
+            color: #ffffff !important;
+            border-color: #007acc !important;
+            font-weight: 600;
+        }
+
+        .title-bar .btn-codes:hover {
+            background: #1177bb !important;
+        }
+
+        .tabs-bar {
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tabs-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .table-wrap {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        .table-wrap table {
+            min-width: 480px;
+        }
+
+        pre {
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            box-sizing: border-box;
+        }
+
+        img, iframe, .code-panel, .terminal-panel, .formula-card, .workspace-banner, .exp-section {
+            max-width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        /* Mobile Breakpoint (Phones: <= 768px) */
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 80px;
+            }
+
+            .title-bar {
+                padding: 4px 8px;
+            }
+
+            .title-long {
+                display: none;
+            }
+
+            .win-title {
+                font-size: 11.5px;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .title-right {
+                gap: 5px;
+            }
+
+            .title-bar .btn-tool {
+                padding: 3px 8px;
+                font-size: 11px;
+            }
+
+            .title-bar .btn-print {
+                display: none; /* Hide print button on mobile to save precious screen width */
+            }
+
+            .tabs-bar a {
+                padding: 6px 11px;
+                font-size: 11.5px;
+            }
+
+            main {
+                padding: 14px 10px 60px !important;
+                width: 100% !important;
+            }
+
+            .workspace-banner {
+                padding: 14px 12px;
+                margin-bottom: 20px;
+            }
+
+            .workspace-banner h1 {
+                font-size: 17px !important;
+                line-height: 1.35 !important;
+                word-break: break-word;
+            }
+
+            .workspace-banner p {
+                font-size: 12.5px !important;
+                line-height: 1.55;
+            }
+
+            .meta-tags {
+                gap: 5px;
+            }
+
+            .tag {
+                font-size: 11px;
+                padding: 3px 7px;
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .exp-section {
+                padding: 14px 10px !important;
+                margin-bottom: 22px !important;
+                border-radius: 6px;
+            }
+
+            .exp-header {
+                gap: 6px;
+                padding-bottom: 8px;
+                margin-bottom: 12px;
+            }
+
+            .exp-title {
+                font-size: 15.5px !important;
+                line-height: 1.35;
+                word-break: break-word;
+            }
+
+            .exp-badge {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+
+            .section-subtitle {
+                font-size: 13px;
+                margin: 16px 0 6px;
+            }
+
+            .theory-wrap {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .aim-box, .apparatus-box, .theory-box, .result-box, .viva-panel {
+                padding: 10px 12px;
+                font-size: 12.5px;
+                line-height: 1.55;
+            }
+
+            .formula-card {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .formula-card .f-eq {
+                font-size: 12px;
+                word-break: break-all;
+            }
+
+            .theory-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px;
+            }
+
+            .theory-card {
+                padding: 10px 12px;
+                font-size: 12.5px;
+            }
+
+            .viva-title {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            .viva-q {
+                font-size: 12.5px;
+            }
+
+            .viva-a {
+                font-size: 12px;
+            }
+
+            .step-list {
+                padding-left: 18px;
+            }
+
+            .step-list li {
+                font-size: 12.5px;
+                margin: 6px 0;
+            }
+
+            pre {
+                font-size: 11px !important;
+                padding: 10px 10px !important;
+                line-height: 1.45;
+            }
+
+            .terminal-panel {
+                font-size: 11px !important;
+                padding: 10px 10px !important;
+                word-break: break-word;
+            }
+
+            /* PDF Card Mobile */
+            .pdf-card {
+                padding: 12px 10px;
+            }
+
+            .pdf-card-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .pdf-card-title {
+                font-size: 13.5px;
+            }
+
+            .pdf-actions {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 6px;
+                width: 100%;
+            }
+
+            .pdf-actions .btn-tool {
+                flex: 1 1 calc(50% - 6px);
+                justify-content: center;
+                text-align: center;
+                padding: 6px 6px;
+                font-size: 11.5px;
+            }
+
+            .pdf-viewer-container iframe {
+                height: 420px;
+            }
+
+            #backToTop {
+                bottom: 16px;
+                right: 16px;
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+
+        /* Extra Small Devices (Phones: <= 380px) */
+        @media (max-width: 380px) {
+            .win-title {
+                display: none; /* Just show the icon on tiny screens */
+            }
+
+            .title-bar .btn-tool {
+                padding: 3px 6px;
+                font-size: 10.5px;
+            }
+
+            .pdf-actions .btn-tool {
+                flex: 1 1 100%;
+            }
+        }
+
     </style>
 </head>
 
@@ -900,7 +1216,7 @@
                         d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74l3.896 3.26-3.896 3.26a1 1 0 0 0 .001 1.479l1.322 1.202c.394.359.99.38 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352z">
                     </path>
                 </svg>
-                <span class="win-title">WMC_Practical_Manual.html - Visual Studio Code</span>
+                <span class="win-title"><span class="title-short">WMC Manual</span><span class="title-long">.html - VS Code</span></span>
             </div>
             <div class="search-container">
                 <svg class="search-icon" viewBox="0 0 24 24">
@@ -912,10 +1228,9 @@
                     oninput="filterSections()">
             </div>
             <div class="title-right">
-                <a href="codes.html" class="btn-tool" style="background:#007acc;color:#fff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px;" title="Switch to Easy Codes Page">💻 Codes Page</a>
-                <button class="btn-tool" id="themeToggle" onclick="toggleTheme()"
-                    title="Toggle Dark/Light Mode">Theme</button>
-                <button class="btn-tool" onclick="window.print()" title="Print Manual">Print Manual</button>
+                <a href="codes.html" class="btn-tool btn-codes" title="Switch to Easy Codes Page">💻 Codes</a>
+                <button class="btn-tool btn-theme" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">Theme</button>
+                <button class="btn-tool btn-print" onclick="window.print()" title="Print Manual">Print</button>
             </div>
         </div>
 
